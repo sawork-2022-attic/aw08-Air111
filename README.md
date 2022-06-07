@@ -11,9 +11,9 @@ Run the project with `mvn spring-boot:run` and send request to `http://localhost
 }
 ```
 
-Try to understand the provided code which demonstrates spring integration between a spring boot application with an externel http service (https://api.chucknorris.io/jokes/random).
+Try to understand the provided code which demonstrates spring integration between a spring boot application with an external http service (https://api.chucknorris.io/jokes/random).
 
-Please implement delivery as an standalone service (just like the random joke service). Refer the sample code to integrate your Micropos system with delivery service so that user can check delivery status on Miropos which actually forwards user request to delivery service on demand.
+Please implement delivery as a standalone service (just like the random joke service). Refer the sample code to integrate your Micropos system with delivery service so that user can check delivery status on Micropos which actually forwards user request to delivery service on demand.
 
 ![](Micropos.svg)
 
