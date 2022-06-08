@@ -2,6 +2,7 @@ package com.micropos.carts.repository;
 
 import com.micropos.carts.model.Cart;
 import com.micropos.carts.model.Item;
+import com.micropos.carts.model.Product;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.lang.Nullable;
@@ -14,6 +15,15 @@ import java.util.List;
 public class Carts{
 
     private final List<Cart> carts = new ArrayList<>();
+
+    public Carts() {
+        Product sampleProduct = new Product("1", "Java编程思想", 20.1, "https://www.linuxidc.com/upload/2014_08/140811101915661.jpg");
+        Item sampleItem = new Item(1, 5, sampleProduct);
+        List<Item> items = new ArrayList<>();
+        items.add(sampleItem);
+        Cart sampleCart = new Cart(1, items);
+        carts.add(sampleCart);
+    }
 
     public boolean addCart(Cart cart) {
         try {
@@ -32,17 +42,16 @@ public class Carts{
     @Nullable
     @Cacheable(value = "carts", key = "#userId")
     public Cart getCart(int userId) {
-        try {
-            return carts.get(userId);
+        for (Cart cart: carts) {
+            if (cart.getId() == userId)
+                return cart;
         }
-        catch (IndexOutOfBoundsException e) {
-            return null;
-        }
+        return null;
     }
 
     @Nullable
     public Item getItem(int userId, String productId) {
-        for (Item item: carts.get(userId).getItems()) {
+        for (Item item: getCart(userId).getItems()) {
             if (item.getProduct().getId().equals(productId))
                 return item;
         }
@@ -51,7 +60,7 @@ public class Carts{
 
     @CacheEvict(value = "carts", key = "#userId")
     public boolean addItem(int userId, Item item) {
-        List<Item> itemList = carts.get(userId).getItems();
+        List<Item> itemList = getCart(userId).getItems();
         String productId = item.getProduct().getId();
         for (int i = 0; i < itemList.size(); i++) {
             if (itemList.get(i).getProduct().getId().equals(productId)) {
@@ -71,7 +80,7 @@ public class Carts{
 
     @CacheEvict(value = "carts", key = "#userId")
     public boolean removeProduct(int userId, String productId) {
-        List<Item> itemList = carts.get(userId).getItems();
+        List<Item> itemList = getCart(userId).getItems();
         for (int i = 0; i < itemList.size(); i++) {
             if (itemList.get(i).getProduct().getId().equals(productId)) {
                 itemList.remove(i);

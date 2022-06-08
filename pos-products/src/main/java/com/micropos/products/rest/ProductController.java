@@ -30,7 +30,9 @@ public class ProductController implements ProductsApi {
 
     @Override
     public ResponseEntity<List<ProductDto>> listProducts(String category, Integer page){
-        List<ProductDto> products = new ArrayList<>(productMapper.toProductsDto(this.productService.products()));
+//        List<ProductDto> products = new ArrayList<>(productMapper.toProductsDto(this.productService.products()));
+        List<ProductDto> products = new ArrayList<>(
+                productMapper.toProductsDto(this.productService.getProducts(category, page)));
         if (products.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

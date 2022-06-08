@@ -18,3 +18,5 @@ Please implement delivery as a standalone service (just like the random joke ser
 ![](Micropos.svg)
 
 Consider the advantage by doing so and write it down in your readme file.
+
+lombok的生成对mapstruct不起作用，晕

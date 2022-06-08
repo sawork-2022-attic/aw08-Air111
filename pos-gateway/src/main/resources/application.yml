@@ -10,7 +10,7 @@ spring:
         - id: pos-carts
           uri: lb://pos-carts
           predicates:
-            - Path=/api/cart/**
+            - Path=/api/cart/**,/api/carts/**
         - id: pos-products
           uri: lb://pos-products
           predicates:
@@ -18,7 +18,7 @@ spring:
         - id: pos-order
           uri: lb://pos-order
           predicates:
-            - Path=/api/order/**
+            - Path=/api/order/**,/api/counter/**
 
 eureka:
   client:

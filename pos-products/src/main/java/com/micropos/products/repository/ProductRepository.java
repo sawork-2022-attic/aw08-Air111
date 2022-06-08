@@ -9,6 +9,8 @@ public interface ProductRepository {
 
     public List<Product> allProducts();
 
+    public List<Product> getProducts(String category, Integer page);
+
     public Product findProduct(String productId);
 
 }

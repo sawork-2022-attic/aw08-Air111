@@ -30,6 +30,7 @@ public class CartController implements CartsApi {
     public CartController(CartService cartService, CartMapper cartMapper) {
         this.cartMapper = cartMapper;
         this.cartService = cartService;
+        System.out.println("cart constructed");
     }
 
     @Override

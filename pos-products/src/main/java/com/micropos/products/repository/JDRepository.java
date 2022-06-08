@@ -17,16 +17,32 @@ import java.util.List;
 public class JDRepository implements ProductRepository {
     private List<Product> products = null;
 
+    public JDRepository() {
+//        try {
+//            if (products == null)
+//                products = parseJD("Java");
+//        } catch (IOException e) {
+//            products = new ArrayList<>();
+//        }
+        Product sampleProduct = new Product(
+                "1", "Java编程思想", 20.1,
+                "https://www.linuxidc.com/upload/2014_08/140811101915661.jpg");
+        products = new ArrayList<>();
+        products.add(sampleProduct);
+    }
+
     @Override
     @Cacheable(value = "products")
     public List<Product> allProducts() {
-        try {
-            if (products == null)
-                products = parseJD("Java");
-        } catch (IOException e) {
-            products = new ArrayList<>();
-        }
         return products;
+    }
+
+    @Override
+    public List<Product> getProducts(String category, Integer page) {
+        if (page > 5)
+            page = page % 6;
+        int step = products.size() / 6;
+        return products.subList(page * step, Math.min(products.size(), page * step + Math.max(1, step)));
     }
 
     @Override

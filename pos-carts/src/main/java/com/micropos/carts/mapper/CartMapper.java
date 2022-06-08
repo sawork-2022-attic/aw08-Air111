@@ -1,9 +1,11 @@
 package com.micropos.carts.mapper;
 
 import com.micropos.carts.model.Cart;
+import com.micropos.carts.model.Product;
 import com.micropos.dto.ItemDto;
 import com.micropos.dto.CartDto;
 import com.micropos.carts.model.Item;
+import com.micropos.dto.ProductDto;
 import org.mapstruct.Mapper;
 
 import java.util.Collection;
@@ -26,4 +28,8 @@ public interface CartMapper {
     Item toItem(ItemDto productDto);
 
     ItemDto toItemDto(Item item);
+
+    Product toProduct(ProductDto productDto);
+
+    ProductDto toPruductDto(Product product);
 }

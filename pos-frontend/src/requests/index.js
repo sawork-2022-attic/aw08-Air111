@@ -1,6 +1,6 @@
 import { API } from "../config";
 
-const url = API.STORE;
+const url = "http://localhost:8080/api";
 
 // async function getCarts() {
 //     const res = await fetch(`${url}/carts`, {
