@@ -6,14 +6,14 @@ spring:
     name: pos-delivery
   cloud:
     function:
-      definition: itemDeliver
+      definition: cartDeliver
     stream:
       function:
         bindings:
-          itemDeliver-in-0: ItemDeliverer
+          cartDeliver-in-0: CartDeliverer
       bindings:
         order-approved:
-          destination: item-approved
+          destination: cart-approved
       rabbit:
         bindings:
           output:

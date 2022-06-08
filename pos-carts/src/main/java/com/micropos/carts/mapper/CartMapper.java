@@ -1,14 +1,23 @@
 package com.micropos.carts.mapper;
 
+import com.micropos.carts.model.Cart;
 import com.micropos.dto.ItemDto;
+import com.micropos.dto.CartDto;
 import com.micropos.carts.model.Item;
-import com.micropos.carts.repository.Cart;
 import org.mapstruct.Mapper;
 
 import java.util.Collection;
 
 @Mapper
 public interface CartMapper {
+
+    Collection<CartDto> toCartsDto(Collection<Cart> carts);
+
+    Collection<Cart> toCarts(Collection<CartDto> cartDtos);
+
+    CartDto toCartDto(Cart cart);
+
+    Cart toCart(CartDto cartDto);
 
     Collection<ItemDto> toItemsDto(Collection<Item> items);
 
