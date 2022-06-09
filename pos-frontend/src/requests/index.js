@@ -15,7 +15,7 @@ async function postCart(product,cartId=1) {
         method: 'post',
         mode: 'cors',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(product),
     })

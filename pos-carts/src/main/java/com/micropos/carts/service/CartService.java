@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.micropos.carts.mapper.CartMapper;
 import com.micropos.carts.model.Cart;
 import com.micropos.carts.model.Item;
+import com.micropos.carts.model.Product;
 import com.micropos.carts.repository.Carts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -58,6 +59,10 @@ public class CartService {
 
     public boolean add(int userId, Item item) {
         return cartRepository.addItem(userId, item);
+    }
+
+    public boolean add(int userId, Product product) {
+        return cartRepository.addProduct(userId, product);
     }
 
     public boolean remove(int userId, String productId) {

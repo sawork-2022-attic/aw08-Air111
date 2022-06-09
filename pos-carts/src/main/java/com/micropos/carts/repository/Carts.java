@@ -79,6 +79,12 @@ public class Carts{
     }
 
     @CacheEvict(value = "carts", key = "#userId")
+    public boolean addProduct(int userId, Product product) {
+        Item item = new Item(0, 1, product);
+        return addItem(userId, item);
+    }
+
+    @CacheEvict(value = "carts", key = "#userId")
     public boolean removeProduct(int userId, String productId) {
         List<Item> itemList = getCart(userId).getItems();
         for (int i = 0; i < itemList.size(); i++) {

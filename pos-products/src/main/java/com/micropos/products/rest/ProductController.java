@@ -7,6 +7,7 @@ import com.micropos.products.mapper.ProductMapper;
 import com.micropos.products.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +30,7 @@ public class ProductController implements ProductsApi {
     }
 
     @Override
+    @CrossOrigin
     public ResponseEntity<List<ProductDto>> listProducts(String category, Integer page){
 //        List<ProductDto> products = new ArrayList<>(productMapper.toProductsDto(this.productService.products()));
         List<ProductDto> products = new ArrayList<>(
@@ -40,6 +42,7 @@ public class ProductController implements ProductsApi {
     }
 
     @Override
+    @CrossOrigin
     public ResponseEntity<ProductDto> showProductById(String productId)
     {
         ProductDto productDto = productMapper.toProductDto(this.productService.getProduct(productId));

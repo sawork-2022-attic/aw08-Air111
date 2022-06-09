@@ -16,9 +16,13 @@ function App() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    getProducts(category, page).then(({ data, totalpages }) => {
+    // getProducts(category, page).then(({ data, totalpages }) => {
+    //   setProducts(data)
+    //   setTotalPages(totalpages);
+    // })
+    getProducts(category, page).then(data => {
       setProducts(data)
-      setTotalPages(totalpages);
+      setTotalPages(20);
     })
   }, [category, page])
 
@@ -76,7 +80,7 @@ function App() {
   //   alert(charge)
   //   setProductsToCart([])
   // }
-
+  console.log(products);
   return (
     <div className="App">
       <div

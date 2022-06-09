@@ -2,30 +2,28 @@ package com.micropos.carts.rest;
 
 import com.micropos.api.CartsApi;
 import com.micropos.carts.model.Cart;
+import com.micropos.carts.model.Product;
 import com.micropos.carts.service.CartService;
 import com.micropos.dto.ItemDto;
 import com.micropos.dto.CartDto;
 import com.micropos.carts.mapper.CartMapper;
 import com.micropos.carts.model.Item;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Schema;
+import com.micropos.dto.ProductDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("api")
+@CrossOrigin
 public class CartController implements CartsApi {
 
     private final CartMapper cartMapper;
 
     private final CartService cartService;
-
 
     public CartController(CartService cartService, CartMapper cartMapper) {
         this.cartMapper = cartMapper;
@@ -58,14 +56,28 @@ public class CartController implements CartsApi {
         return new ResponseEntity<>(cartDto, HttpStatus.OK);
     }
 
+//    @Override
+//    public ResponseEntity<CartDto> addItemToCart(Integer userId, ItemDto itemDto) {
+//        Item item = cartMapper.toItem(itemDto);
+//        Cart cart = cartService.getCart(userId);
+//        if (cart == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        cartService.add(userId, item);
+//        CartDto cartDto = cartMapper.toCartDto(cart);
+//        return new ResponseEntity<>(cartDto, HttpStatus.OK);
+//    }
+
     @Override
-    public ResponseEntity<CartDto> addItemToCart(Integer userId, ItemDto itemDto) {
-        Item item = cartMapper.toItem(itemDto);
-        Cart cart = cartService.getCart(userId);
+    public ResponseEntity<CartDto> addProductToCart(Integer cartId,
+                                                    ProductDto productDto
+    ) {
+        Product product = cartMapper.toProduct(productDto);
+        Cart cart = cartService.getCart(cartId);
         if (cart == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        cartService.add(userId, item);
+        cartService.add(cartId, product);
         CartDto cartDto = cartMapper.toCartDto(cart);
         return new ResponseEntity<>(cartDto, HttpStatus.OK);
     }

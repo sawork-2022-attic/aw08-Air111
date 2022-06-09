@@ -85,8 +85,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Cart"
     post:
-      summary: Add an item to cart
-      operationId: addItemToCart
+      summary: Add an product to cart
+      operationId: addProductToCart
       tags:
         - cart
       parameters:
@@ -98,11 +98,11 @@ paths:
             type: integer
             format: int32
       requestBody:
-        description: The details of the item.
+        description: The details of the product.
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Item'
+              $ref: '#/components/schemas/Product'
         required: true
       responses:
         '200':
