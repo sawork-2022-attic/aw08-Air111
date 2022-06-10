@@ -1,6 +1,9 @@
 package com.micropos.delivery;
 
+import com.micropos.delivery.model.Order;
+import com.micropos.delivery.service.DeliveryService;
 import com.micropos.dto.CartDto;
+import org.aspectj.weaver.ast.Or;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +13,18 @@ import org.springframework.messaging.support.MessageBuilder;
 
 import java.util.function.Consumer;
 
-public class CartChecker implements Consumer<CartDto> {
+public class OrderChecker implements Consumer<Order> {
 
-    public static final Logger log = LoggerFactory.getLogger(CartChecker.class);
+    private DeliveryService service;
+
+    public static final Logger log = LoggerFactory.getLogger(OrderChecker.class);
 
     private StreamBridge streamBridge;
+
+    @Autowired
+    public void setService(DeliveryService service) {
+        this.service = service;
+    }
 
     @Autowired
     public void setStreamBridge(StreamBridge streamBridge) {
@@ -22,9 +32,10 @@ public class CartChecker implements Consumer<CartDto> {
     }
 
     @Override
-    public void accept(CartDto cartDto) {
-        log.info("Deliver cart with ID {}", cartDto.getId());
-        streamBridge.send("item-approved", message(cartDto));
+    public void accept(Order order) {
+        service.addOrder(order);
+        log.info("Deliver cart with ID {}", order.getCartDto().getId());
+        streamBridge.send("item-approved", message(order));
     }
 
     private static final <T> Message<T> message(T val) {

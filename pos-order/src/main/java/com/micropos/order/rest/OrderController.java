@@ -1,6 +1,6 @@
 package com.micropos.order.rest;
 
-import com.micropos.api.CounterApi;
+import com.micropos.api.OrderApi;
 import com.micropos.dto.CartDto;
 import com.micropos.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api")
-public class OrderController implements CounterApi {
+public class OrderController implements OrderApi {
 
     private OrderService orderService;
 

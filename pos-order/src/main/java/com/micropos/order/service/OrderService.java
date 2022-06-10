@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.micropos.dto.CartDto;
 import com.micropos.dto.ItemDto;
 import com.micropos.order.model.Cart;
+import com.micropos.order.model.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class OrderService {
 
     private RestTemplate restTemplate;
 
+    private int orderCnt = 0;
+
     @Autowired
     public void setStreamBridge(StreamBridge streamBridge) {
         this.streamBridge = streamBridge;
@@ -39,14 +42,10 @@ public class OrderService {
     }
 
     public double checkout(CartDto cartDto) {
-//        for (ItemDto itemDto: itemsDto) {
-//            log.info("Checkout {} product(s) with ID {}", itemDto.getQuantity(), itemDto.getProductId());
-//            streamBridge.send("ItemDeliverer", itemDto);
-//        }
+        streamBridge.send("OrderDeliverer", new Order(orderCnt++, cartDto));
         int cartId = cartDto.getId();
         log.info("Checkout cart with ID {}", cartId);
         String url = "http://localhost:8080/carts/" +cartId + "/total";
-        streamBridge.send("CartDeliverer", cartDto);
         try {
             Double res = restTemplate.getForObject(url, Double.class);
             if (res == null)

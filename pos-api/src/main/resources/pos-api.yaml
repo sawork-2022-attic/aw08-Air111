@@ -201,12 +201,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /counter/checkout:
+  /order/checkout:
     post:
       summary: checkout a cart
       operationId: checkout
       tags:
-        - counter
+        - order
       requestBody:
         description: The cart to checkout.
         content:

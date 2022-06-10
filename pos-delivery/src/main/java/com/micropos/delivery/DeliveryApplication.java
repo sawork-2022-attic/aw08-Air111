@@ -1,10 +1,6 @@
 package com.micropos.delivery;
 
-import com.micropos.carts.model.Item;
-import com.micropos.dto.CartDto;
-import com.micropos.dto.ItemDto;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.micropos.delivery.model.Order;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +14,6 @@ public class DeliveryApplication {
         SpringApplication.run(DeliveryApplication.class, args);
     }
 
-    @Bean
-    public Consumer<CartDto> checkCart() { return new CartChecker(); }
+//    @Bean
+//    public Consumer<Order> checkOrder() { return new OrderChecker(); }
 }
