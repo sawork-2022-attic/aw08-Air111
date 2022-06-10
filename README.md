@@ -19,4 +19,11 @@ Please implement delivery as a standalone service (just like the random joke ser
 
 Consider the advantage by doing so and write it down in your readme file.
 
+---
+
 lombok的生成对mapstruct不起作用，晕
+
+优点：
+
+1. 不像gateway只能转发http请求，应用集成能够将更加一般性的组件连接起来
+2. 当应用之间数据的传输不是简单的恒等时，filter可以简便地在不引入新组件的情况下进行数据的处理，从而使得应用集成更加方便美丽
